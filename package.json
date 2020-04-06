@@ -1,0 +1,8 @@
+{
+  "name": "javaMessengerJsonApi",
+  "version": "1.0.0",
+  "description": "a json Rest api for an instant messaging application ",
+  "main": "index.js",
+  "author": "Abdelbassite Badou",
+  "license": "MIT"
+}
