@@ -1,8 +1,17 @@
 {
-  "name": "javaMessengerJsonApi",
-  "version": "1.0.0",
-  "description": "a json Rest api for an instant messaging application ",
-  "main": "index.js",
-  "author": "Abdelbassite Badou",
-  "license": "MIT"
+	"name": "javaMessengerJsonApi",
+	"version": "1.0.0",
+	"description": "a json Rest api for an instant messaging application ",
+	"main": "src/app.js",
+	"author": "Abdelbassite Badou",
+	"license": "MIT",
+	"scripts": {
+		"start": "nodemon ./src/app.js"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"socket.io": "^2.3.0",
+		"typedi": "^0.8.0"
+	}
 }
