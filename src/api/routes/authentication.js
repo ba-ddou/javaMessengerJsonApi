@@ -15,6 +15,8 @@ module.exports = class Authentication {
 		this.config = container.get("config");
 		//create service instance and add it to typedi's container
 		this.service = container.get(Service);
+		//get data object frm typedi
+		this.data = container.get("data");
 
 		//attach get handler
 		this.router.post("/", this.post);
@@ -26,7 +28,8 @@ module.exports = class Authentication {
 		var [token, err, statusCode] = await this.service.post(req.body);
 		res.status(statusCode);
 		if (token) {
-			res.end(JSON.stringify({ token }));
+			let messages = await this.data.read("messages");
+			res.end(JSON.stringify({ token, messages }));
 		} else {
 			res.end(JSON.stringify({ err }));
 		}

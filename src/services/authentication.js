@@ -6,7 +6,6 @@
  */
 
 var jwt = require("jsonwebtoken");
-var helpers = require("../helpers");
 
 module.exports = class AuthenticationService {
 	constructor(container) {
