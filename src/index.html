@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Socket.IO chat</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body {
+				font: 13px Helvetica, Arial;
+			}
+			#controls {
+				background: #000;
+				padding: 3px;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+			}
+			input {
+				border: 0;
+				padding: 10px;
+				width: 90%;
+				margin-right: 0.5%;
+			}
+			button {
+				width: 9%;
+				background: rgb(130, 224, 255);
+				border: none;
+				padding: 10px;
+			}
+			#messages {
+				list-style-type: none;
+				margin: 0;
+				padding: 0;
+			}
+			#messages li {
+				padding: 5px 10px;
+			}
+			#messages li:nth-child(odd) {
+				background: #eee;
+			}
+		</style>
+	</head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io();
+		socket.on("conversation", (cnv) => {
+			console.log(cnv);
+			for (let msg of cnv) {
+				var newLI = document.createElement("li");
+				newLI.appendChild(document.createTextNode(msg.message));
+				document.getElementById("messages").appendChild(newLI);
+			}
+		});
+		socket.on("message", (msg) => {
+			var newLI = document.createElement("li");
+			newLI.appendChild(document.createTextNode(msg));
+			document.getElementById("messages").appendChild(newLI);
+		});
+
+		function send(e) {
+			let message = document.getElementById("m").value;
+			socket.emit("message", message);
+
+			var newLI = document.createElement("li");
+			newLI.appendChild(document.createTextNode(message));
+			document.getElementById("messages").appendChild(newLI);
+			document.getElementById("m").value = "";
+		}
+	</script>
+	<body>
+		<ul id="messages"></ul>
+		<div id="controls">
+			<input id="m" autocomplete="off" /><button onclick="send()">
+				Send
+			</button>
+		</div>
+	</body>
+</html>

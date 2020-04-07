@@ -20,10 +20,21 @@ module.exports = class MessagesService {
 		this.init();
 	}
 
-	init() {
+	async init() {
+		this.conversation = await this.data.read("messages");
 		this.io.on("connection", (socket) => {
-			this.sockets.push(socket);
 			console.log("a user connected");
+			console.log(this.conversation);
+			socket.emit("conversation", this.conversation);
+
+			socket.on("message", (msg) => {
+				socket.broadcast.emit("message", msg);
+				console.log("message: " + msg);
+			});
+
+			socket.on("disconnect", (_) => {
+				console.log("user disconnected");
+			});
 		});
 	}
 };

@@ -34,6 +34,9 @@ const messagesService = Container.get(MessagesService);
 
 app.use(express.json());
 app.use("/", api.router);
+app.get("/", function (req, res) {
+	res.sendFile(__dirname + "/index.html");
+});
 
 http.listen(config.port, (_) =>
 	console.log(`server is listening on port ${config.port}`)
