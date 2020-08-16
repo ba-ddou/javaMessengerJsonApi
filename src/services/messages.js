@@ -24,8 +24,8 @@ module.exports = class MessagesService {
 		this.conversation = await this.data.read("messages");
 		this.io.on("connection", (socket) => {
 			console.log("a user connected");
-			console.log(this.conversation);
 			socket.emit("conversation", this.conversation);
+			socket.emit("message", "first java socket message");
 
 			socket.on("message", (msg) => {
 				socket.broadcast.emit("message", msg);
