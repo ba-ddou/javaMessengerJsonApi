@@ -6,7 +6,8 @@
 	"author": "Abdelbassite Badou",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon ./src/app.js"
+		"start": "nodemon ./src/app.js",
+		"serve": "node ./src/app.js"
 	},
 	"dependencies": {
 		"express": "^4.17.1",
