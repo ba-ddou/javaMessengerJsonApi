@@ -17,7 +17,10 @@ module.exports = class AuthenticationService {
 
 	//Generate user token | requires username and password
 	post = async (payload) => {
+		console.log("AuthenticationService -> post -> payload", payload);
 		var { username, password } = payload;
+		// console.log("AuthenticationService -> post -> password", password);
+		// console.log("AuthenticationService -> post -> username", username);
 
 		if (username && password) {
 			// retreive admin object from the database

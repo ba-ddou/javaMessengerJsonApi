@@ -28,10 +28,10 @@ module.exports = class Authentication {
 		var [token, err, statusCode] = await this.service.post(req.body);
 		res.status(statusCode);
 		if (token) {
-			let messages = await this.data.read("messages");
-			res.end(JSON.stringify({ token, messages }));
+			// let messages = await this.data.read("messages");
+			res.end(JSON.stringify(token));
 		} else {
-			res.end(JSON.stringify({ err }));
+			res.end(JSON.stringify(false));
 		}
 	};
 };

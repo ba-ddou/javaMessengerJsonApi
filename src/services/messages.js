@@ -24,12 +24,18 @@ module.exports = class MessagesService {
 		this.conversation = await this.data.read("messages");
 		this.io.on("connection", (socket) => {
 			console.log("a user connected");
-			socket.emit("conversation", this.conversation);
-			socket.emit("message", "first java socket message");
+			// socket.emit("conversation", this.conversation);
+			// socket.emit("message", "first java socket message");
+			// socket.emit("message", JSON.stringify({
+			// 	from: "badou",
+			// 	message: "what's up!!",
+			// 	timestamp: "27/09/2020 19:18:35"
+			// }));
 
-			socket.on("message", (msg) => {
-				socket.broadcast.emit("message", msg);
-				console.log("message: " + msg);
+			socket.on("message", (rawMsgObject) => {
+				// let msgObject = JSON.parse(rawMsgObject);
+				socket.broadcast.emit("message", rawMsgObject);
+				console.log("message: " + rawMsgObject);
 			});
 
 			socket.on("disconnect", (_) => {
